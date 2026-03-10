@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #1b263b, #203a43);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial;
+        }
+
+        .login-box {
+            background: rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 15px;
+            width: 350px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: none;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #ffd700;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .link {
+            margin-top: 15px;
+            color: white;
+        }
+
+        .link a {
+            color: #00c896;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="login-box">
+        <h2>Login</h2>
+
+        <form method="POST">
+            <input type="email" name="email" placeholder="Enter Email" required>
+            <button type="submit">Login</button>
+        </form>
+
+        <div class="link">
+            New user? <a href="/signup">Sign Up</a>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Authentication Required</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #1b263b, #203a43);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .auth-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 50px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .auth-box h1 {
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 35px;
+            margin: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s ease;
+            cursor: pointer;
+        }
+
+        .login-btn {
+            background: #ffd700;
+            color: black;
+        }
+
+        .signup-btn {
+            background: #00c896;
+            color: white;
+        }
+
+        /* Hover Effects */
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-box">
+        <h1>Please Login or Sign Up ❤️</h1>
+
+        <a href="/login" class="btn login-btn">Login</a>
+        <a href="/signup" class="btn signup-btn">Sign Up</a>
+    </div>
+
+</body>
+</html>

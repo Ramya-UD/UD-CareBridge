@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- PARTICLE BACKGROUND -->
+<canvas id="bgCanvas"></canvas>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>CareBridge </h1>
+  <p>
+    Reducing food waste using IoT technology • 
+    Real-time monitoring with ESP32 + MQ-135 + DHT22 • 
+    Supporting orphaned children
+  </p>
+</section>
+
+<!-- GLOBAL IMPACT MOVING STRIP -->
+<section class="impact-section">
+  <h2>People & Foundations Helping Orphanages Worldwide 🌍</h2>
+
+  <div class="ticker">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <section class="learning-section">
+    <h2>Learn From These Changemakers</h2>
+    <div id="learnGrid" class="learn-grid"></div>
+  </section>
+
+</section>
+
+<script src="{{ url_for('static', filename='ticker.js') }}"></script>
+<script src="{{ url_for('static', filename='background.js') }}"></script>
+
+{% endblock %}

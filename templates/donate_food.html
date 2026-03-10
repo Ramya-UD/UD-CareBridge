@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="donate-bg">
+
+<section class="donation-hero">
+    <h1>Share a Meal. Change a Life.</h1>
+    <p>Your food donation directly supports verified orphanages.</p>
+</section>
+
+<section class="donation-container glass-frame">
+
+<h2>🍱 Food Donation Form</h2>
+
+<form action="{{ url_for('donate_food') }}" method="POST">
+
+    <!-- Food Type -->
+    <input type="text" name="food_type"
+           placeholder="Food Type (Rice, Vegetables...)"
+           required>
+
+    <!-- Quantity + Unit Row -->
+    <div class="form-row">
+
+        <input type="number"
+               name="quantity"
+               placeholder="Enter Quantity"
+               min="1"
+               step="1"
+               id="quantityField"
+               required>
+
+        <select name="unit"
+                id="unitField"
+                required>
+            <option value="">Select Unit</option>
+            <option value="kg">Kilograms (kg)</option>
+            <option value="packets">Packets</option>
+            <option value="plates">Plates</option>
+            <option value="other">Other</option>
+        </select>
+
+    </div>
+
+    <!-- Custom Unit -->
+    <input type="text"
+           name="custom_unit"
+           placeholder="Specify unit"
+           id="customUnit"
+           style="display:none;">
+
+    <!-- Approx Checkbox -->
+    <div class="approx-group">
+        <input type="checkbox" id="approx" name="approx">
+        <label for="approx">
+            I am not sure about exact quantity (Approximate)
+        </label>
+    </div>
+
+    <!-- Phone -->
+    <div class="phone-wrapper">
+        <span class="phone-prefix">+91</span>
+        <input type="tel"
+               name="phone"
+               pattern="[0-9]{10}"
+               maxlength="10"
+               placeholder="Enter 10-digit phone number"
+               required>
+    </div>
+
+    <!-- Address -->
+    <input type="text"
+           name="location"
+           placeholder="Full Address for Pickup"
+           required>
+
+    <input type="text"
+           name="landmark"
+           placeholder="Nearby Landmark (Optional)">
+
+    <textarea name="message"
+              placeholder="Additional Message (Optional)"></textarea>
+
+    <button type="submit" class="primary-btn">
+        Donate Food Now
+    </button>
+
+</form>
+
+</section>
+</div>
+
+
+<script>
+const approxCheckbox = document.getElementById("approx");
+const quantityField = document.getElementById("quantityField");
+const unitField = document.getElementById("unitField");
+const customUnit = document.getElementById("customUnit");
+// Prevent negative numbers
+quantityField.addEventListener("input", function() {
+    if (this.value < 1) {
+        this.value = 1;
+    }
+});
+approxCheckbox.addEventListener("change", function() {
+
+    if (this.checked) {
+        quantityField.removeAttribute("required");
+        unitField.removeAttribute("required");
+
+        quantityField.disabled = true;
+        unitField.disabled = true;
+
+        quantityField.placeholder = "Approximate quantity";
+
+    } else {
+        quantityField.setAttribute("required", "required");
+        unitField.setAttribute("required", "required");
+
+        quantityField.disabled = false;
+        unitField.disabled = false;
+
+        quantityField.placeholder = "Enter Quantity";
+    }
+});
+
+unitField.addEventListener("change", function() {
+    if (this.value === "other") {
+        customUnit.style.display = "block";
+        customUnit.setAttribute("required", "required");
+    } else {
+        customUnit.style.display = "none";
+        customUnit.removeAttribute("required");
+    }
+});
+</script>
+
+{% endblock %}

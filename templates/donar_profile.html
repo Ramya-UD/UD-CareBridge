@@ -1,0 +1,10 @@
+<h1>{{ user.name }}</h1>
+<p>CareBridge ID: {{ user.id }}</p>
+
+<h3>Total Donations: {{ donations|length }}</h3>
+
+<ul>
+    {% for d in donations %}
+        <li>{{ d.quantity }} {{ d.unit }}</li>
+    {% endfor %}
+</ul>

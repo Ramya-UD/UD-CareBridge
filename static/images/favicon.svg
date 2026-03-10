@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+
+  <!-- Green background -->
+  <circle cx="50" cy="50" r="48" fill="#1B5E20"></circle>
+
+  <!-- White inner plate -->
+  <circle cx="50" cy="55" r="18" fill="white"></circle>
+
+  <!-- Refined symmetric heart -->
+  <path d="M50 38
+           C50 32, 62 32, 62 42
+           C62 50, 50 60, 50 60
+           C50 60, 38 50, 38 42
+           C38 32, 50 32, 50 38Z" fill="#E53935"></path>
+
+  <!-- Orphanage home inside heart -->
+  <path d="M44 44 L50 39 L56 44 V52 H44 Z" fill="white"></path>
+  <rect x="49" y="47" width="2" height="5" fill="#E53935"></rect>
+
+  <!-- Circular meaning text -->
+  <defs>
+    <path id="ring" d="M50,50
+             m-42,0
+             a42,42 0 1,1 84,0
+             a42,42 0 1,1 -84,0"></path>
+  </defs>
+
+  <text font-size="6" fill="white" letter-spacing="1.5">
+    <textPath href="#ring" startOffset="6%">
+      CARE • PEACE • COMPASSION • SERVICE • HOPE •
+    </textPath>
+  </text>
+
+</svg>

@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+
+<section class="map-hero">
+
+    <div class="map-header">
+        <h2>CareBridge Location Intelligence</h2>
+        <p>Amma Foundation Orphanage • Srikakulam</p>
+    </div>
+
+    <div class="map-dashboard">
+
+        <div class="map-stats">
+            <div class="stat">
+                <span class="label">Distance</span>
+                <span id="distanceInfo">Calculating...</span>
+            </div>
+
+            <div class="stat">
+                <span class="label">GPS Status</span>
+                <span id="gpsStatus">Waiting permission</span>
+            </div>
+        </div>
+
+        <div id="careMap"></div>
+
+        <div class="map-legend">
+            <div><span class="legend-dot orphan"></span> Orphanage</div>
+            <div><span class="legend-dot food"></span> Food Support</div>
+            <div><span class="legend-dot medical"></span> Hospitals</div>
+            <div><span class="legend-dot essential"></span> Essentials</div>
+        </div>
+
+    </div>
+</section>
+
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+
+
+<script>
+const orphanage = [18.2969, 83.8977];
+
+/* ===== MAP ===== */
+const map = L.map('careMap', {
+    zoomControl: false,
+    scrollWheelZoom: false
+}).setView(orphanage, 14);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+/* ===== LUXURY ICON ===== */
+function luxuryIcon(color, main=false){
+    return L.divIcon({
+        html: `<div class="lux-marker ${main ? 'main-marker' : ''}"
+               style="background:${color}; box-shadow:0 0 12px ${color}"></div>`,
+        className: "",
+        iconSize: [22,22]
+    });
+}
+
+/* ===== STATUS ===== */
+const distanceBox = document.getElementById("distanceInfo");
+const gpsStatus = document.getElementById("gpsStatus");
+
+function setStatus(text){
+    gpsStatus.innerText = text;
+}
+
+/* ===== DISTANCE CALCULATION ===== */
+function calculateDistance(lat1, lon1, lat2, lon2){
+    const R = 6371;
+    const dLat = (lat2-lat1) * Math.PI/180;
+    const dLon = (lon2-lon1) * Math.PI/180;
+
+    const a =
+        Math.sin(dLat/2)**2 +
+        Math.cos(lat1*Math.PI/180) *
+        Math.cos(lat2*Math.PI/180) *
+        Math.sin(dLon/2)**2;
+
+    return (R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))).toFixed(2);
+}
+
+/* ===== USER LOCATION ===== */
+let userMarker;
+let userCircle;
+
+function locateUser(){
+
+    if(!navigator.geolocation){
+        setStatus("Location not supported");
+        return;
+    }
+
+    setStatus("Waiting for permission...");
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position){
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            const userPos = [lat, lng];
+
+            setStatus("GPS Connected");
+
+            if(userMarker){
+                userMarker.setLatLng(userPos);
+                userCircle.setLatLng(userPos);
+            }else{
+                userMarker = L.marker(userPos).addTo(map);
+
+                userCircle = L.circle(userPos,{
+                    radius:80,
+                    color:"black",
+                    fillOpacity:0.2
+                }).addTo(map);
+            }
+
+            const km = calculateDistance(lat, lng, orphanage[0], orphanage[1]);
+            distanceBox.innerText = km + " km";
+
+            /* Base glow */
+L.polyline([userPos, orphanage], {
+    color: "#000",
+    weight: 8,
+    opacity: 0.15
+}).addTo(map);
+
+/* Main route */
+L.polyline([userPos, orphanage], {
+    color: "#00E5FF",
+    weight: 4,
+    opacity: 1,
+    dashArray: "6,8"
+}).addTo(map);
+        },
+
+        function(error){
+            if(error.code === error.PERMISSION_DENIED){
+                setStatus("Permission required");
+            }else{
+                setStatus("Fetching location...");
+                setTimeout(locateUser, 2000);
+            }
+        },
+
+        {
+            enableHighAccuracy: false,
+            timeout: 10000,
+            maximumAge: 30000
+        }
+    );
+}
+
+/* ===== AUTO START AFTER PAGE LOAD ===== */
+window.onload = locateUser;
+
+/* ===== ORPHANAGE ===== */
+L.marker(orphanage, {icon: luxuryIcon("#ff3b3b", true)})
+.addTo(map)
+.bindPopup("<b>Amma Foundation Orphanage</b>")
+.openPopup();
+
+/* ===== FOOD ===== */
+L.marker([18.3001, 83.9005], {icon: luxuryIcon("#D4AF37")}).addTo(map);
+L.marker([18.2950, 83.8920], {icon: luxuryIcon("#D4AF37")}).addTo(map);
+
+/* ===== MEDICAL ===== */
+L.marker([18.2980, 83.9040], {icon: luxuryIcon("#2b7cff")}).addTo(map);
+L.marker([18.3015, 83.9055], {icon: luxuryIcon("#2b7cff")}).addTo(map);
+
+/* ===== ESSENTIAL ===== */
+L.marker([18.3025, 83.8950], {icon: luxuryIcon("#00c853")}).addTo(map);
+
+</script>
+
+
+
+
+{% endblock %}

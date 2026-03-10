@@ -1,0 +1,79 @@
+{% if not pdf %}
+{% extends "base.html" %}
+{% endif %}
+{% block content %}
+
+{% if not pdf %}
+<div class="page-home-bg">
+<section class="card-page-center">
+{% endif %}
+
+
+  <div class="atm-card" style="background: {{ user.color }}">
+
+<img src="data:image/png;base64,{{ user.qr }}" class="atm-qr">
+
+    <div class="atm-top">
+        <img src="{{ url_for('static', filename='images/logo.jpg') }}" class="atm-logo">
+        <span class="atm-title">CareBridge</span>
+    </div>
+
+    <div class="atm-chip"></div>
+
+    <div class="atm-number">
+        {{ user.id }}
+    </div>
+
+  
+
+
+
+    <div class="atm-bottom">
+        <div>
+            <p class="atm-label">CARD HOLDER</p>
+            <p class="atm-name">{{ user.name }}</p>
+        </div>
+
+        <div>
+            <p class="atm-label">DONAR TYPE</p>
+            <p class="atm-type">{{ user.type }}</p>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+{% if not pdf %}
+    
+
+<div class="member">
+    <p class="m-label">Registered Email</p>
+    <p class="m-value">{{ user.email }}</p>
+</div>
+
+
+<div class="member">
+    <p class="m-label">Age</p>
+    <p class="m-value">{{ user.user_age }}</p>
+</div>
+
+    <a href="/profile" class="primary-btn">Go to Profile →</a>
+
+
+{% endif %}
+
+
+
+</section>
+
+</div>
+
+
+{% if not pdf %}
+</section>
+</div>
+{% endif %}
+{% endblock %}

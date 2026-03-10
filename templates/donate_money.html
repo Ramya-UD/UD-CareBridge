@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="donate-bg">
+
+<section class="donation-hero">
+<h1>Support With Money</h1>
+<p>Even a small amount can bring a big smile.</p>
+</section>
+
+<section class="donation-container glass-frame">
+
+<h2>💰 Money Donation</h2>
+
+<form method="POST">
+
+<input type="number"
+       name="amount"
+       min="1"
+       max="100"
+       step="1"
+       oninput="if(this.value < 1) this.value = 1;"
+       placeholder="Enter amount (₹1 - ₹100)"
+       required>
+
+<textarea name="message"
+          placeholder="Optional message"></textarea>
+
+<button type="submit" class="primary-btn">
+Donate Money
+</button>
+
+</form>
+
+</section>
+</div>
+
+{% endblock %}

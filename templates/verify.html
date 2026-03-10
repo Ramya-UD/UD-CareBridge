@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareBridge Member Verification</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    
+</head>
+
+<body class="verify-bg">
+
+<div class="verify-card">
+
+    <h2>✔ Verified CareBridge Member</h2>
+
+    <div class="card-preview" id="cardArea">
+        <div class="atm-card" style="background: {{ user.color }}">
+            <div class="atm-top">
+        <img src="{{ url_for('static', filename='images/logo.jpg') }}" class="atm-logo">
+        <span class="atm-title">CareBridge</span>
+    </div>
+
+            <div class="atm-chip"></div>
+
+            <div class="atm-number">{{ user.id }}</div>
+
+            <div class="atm-bottom">
+                <div>
+                    <p class="atm-label">CARD HOLDER</p>
+                    <p class="atm-name">{{ user.name }}</p>
+                </div>
+
+                <div>
+                    <p class="atm-label">DONOR TYPE</p>
+                    <p class="atm-type">{{ user.type }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+</body>
+</html>

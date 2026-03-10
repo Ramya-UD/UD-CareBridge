@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareBridge </title>
+
+    <link rel="icon" type="image/png"
+    href="{{ url_for('static', filename='images/logo.png') }}">
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='images/logo.jpg') }}" class="site-logo">
+        <span class="site-title">CareBridge </span>
+    </div>
+<nav class="menu">
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/map_view">Map Visualization</a>
+    <a href="{{ url_for('donate_food') }}">Donate Food</a>
+    <a href="/donate_accessories">Donate Accessories</a>
+
+
+    {% if logged_in %}
+<div class="profile-menu">
+
+    <div class="nav-avatar-container">
+
+        {% if session.user.photo %}
+            <img src="{{ url_for('static', filename='uploads/' + session.user.photo) }}"
+                 class="nav-avatar">
+        {% else %}
+            <div class="nav-avatar"
+                 style="background: {{ session.user.color }}">
+                 {{ session.user.name.split(' 0')[0] }}
+            </div>
+        {% endif %}
+
+        <!-- UPLOAD OVERLAY -->
+        <form action="/upload_photo"
+              method="POST"
+              enctype="multipart/form-data"
+              class="nav-upload-overlay">
+
+            <label for="navPhotoUpload">
+                <i class="fa fa-camera"></i>
+                <span>Upload Photo</span>
+            </label>
+
+            <input type="file"
+                   id="navPhotoUpload"
+                   name="photo"
+                   accept="image/*"
+                   onchange="this.form.submit()">
+        </form>
+
+
+
+    </div>
+
+    <div class="dropdown">
+        <a href="/profile">My Profile</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+</div>
+{% else %}
+
+
+        <a href="/login">Login</a>
+        <a href="/signup">Join Us</a>
+    {% endif %}
+</nav>
+
+</header>
+
+
+
+        
+
+
+{% block content %}{% endblock %}
+
+<footer class="footer">
+    <h5>Visit With ❤️</h5>
+
+    <div class="social-icons">
+        <a href="https://youtube.com/@RAMYAUD-p3k" target="_blank" title="YouTube">
+            <i class="fab fa-youtube"></i>
+        </a>
+
+        <a href="https://www.linkedin.com/in/ramya-ud/" target="_blank" title="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+        </a>
+
+        <a href="https://github.com/Ramya-UD" target="_blank" title="GitHub">
+            <i class="fab fa-github"></i>
+        </a>
+
+        <a href="mailto:udsanu27@gmail.com" title="Email">
+            <i class="fas fa-envelope"></i>
+        </a>
+    </div>
+
+    <p>© 2026 CareBridge </p>
+</footer>
+
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+const firebaseConfig = {
+databaseURL:"https://foodfreshnessdetection-951f9-default-rtdb.firebaseio.com"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+onValue(ref(db,"alerts"), (snapshot)=>{
+
+const data = snapshot.val();
+
+if(data && data.status === true){
+alert("🚨 Orphanage urgently needs food donations!");
+}
+
+});
+
+</script>
+
+</body>
+</html>

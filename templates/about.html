@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+body{
+    margin:0;
+    font-family: serif;
+    background: linear-gradient(180deg,#050c1b,#081a35);
+    color:white;
+}
+
+/* PAGE CONTENT */
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:120px 20px 60px;
+    text-align:center;
+}
+
+h1{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#9fdcff;
+    margin-bottom:40px;
+}
+
+.card{
+    position:relative;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(0,255,255,0.2);
+    border-radius:16px;
+    padding:25px;
+    margin:20px 0;
+    text-align:left;
+    overflow:hidden;
+    transition: all 0.4s ease;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(0,230,255,0.25),
+        transparent
+    );
+    transition:0.6s;
+}
+
+.card:hover{
+    transform:translateY(-8px) scale(1.02);
+    border:1px solid #00e6ff;
+    box-shadow:0 0 25px rgba(0,230,255,0.3);
+}
+
+.card:hover::before{
+    left:100%;
+}
+
+.card h3{
+    color:#00e6ff;
+}
+
+.mission-box{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+</style>
+
+
+<div class="container">
+
+    <h1>About Our Mission</h1>
+    <div class="subtitle">
+        Connecting surplus food to orphaned children through technology
+    </div>
+
+    <div class="card">
+        <h3>🌍 Who We Are</h3>
+        <p>
+        CareBridge  is a social impact platform created by U D RAMYA
+        to reduce food waste and support orphanages using IoT monitoring.
+        </p>
+    </div>
+
+
+
+
+
+
+
+<div class="card">
+  <h3>👩‍💻 Developer Contribution</h3>
+
+  <p>
+  The CareBridge platform is an
+  IoT-based food safety and donation monitoring system.
+  </p>
+
+  <p>
+  Responsibilities include hardware integration, cloud connectivity,
+  web dashboard development, and system testing.
+  </p>
+</div>
+
+
+
+    <div class="mission-box">
+        <div class="card">
+            <h3>❤️ Our Vision</h3>
+            <p>
+            A future where no child sleeps hungry and no good food is wasted.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🤝 Our Impact</h3>
+            <p>
+            Supporting orphanages across Andhra Pradesh using smart food safety monitoring.
+            </p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>📍 Focus Region</h3>
+        <p>
+        Dedicated to supporting orphaned children across Andhra Pradesh.
+        </p>
+    </div>
+
+</div>
+
+<section class="timeline-section">
+
+  <h2>Project Development Timeline</h2>
+<h2 class="timeline-title">
+Innovation Journey of CareBridge
+</h2>
+<p class="timeline-sub">
+From concept to real-time food safety monitoring platform
+</p>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <h3>Concept & Research</h3>
+        <p>🟢 2025 — Observed two major issues: food wastage and lack of safe food delivery to orphanages.</p>
+    
+        
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <h3>Hardware Integration</h3>
+        <p>Integrated ESP32, MQ-135 gas sensor, and DHT22 temperature & humidity sensor.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <h3>Cloud Connectivity</h3>
+        <p>Configured Wi-Fi communication and Firebase real-time database for monitoring.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <h3>Web Dashboard</h3>
+        <p>Developed web interface to display food freshness status and alerts.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <h3>CareBridge Platform Launch</h3>
+        <p>Connected food donors and orphanages with smart monitoring and safety validation.</p>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+{% endblock %}
+

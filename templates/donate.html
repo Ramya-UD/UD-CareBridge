@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Donate Food</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='website2/style.css') }}">
+</head>
+
+<body>
+
+
+
+
+<div class="bg-particles"></div>
+<div class="container">
+
+
+<!-- BOY -->
+<div class="character-wrap left">
+    <img src="{{ url_for('static', filename='images/boy.png') }}"
+         class="character boy"
+         onmouseover="speakBoy()"
+         onclick="speakBoy()">
+</div>
+
+<!-- GIRL -->
+<div class="character-wrap right">
+    <img src="{{ url_for('static', filename='images/girl.png') }}"
+         class="character girl"
+         onmouseover="speakGirl()"
+         onclick="speakGirl()">
+</div>
+
+    <h1 class="title">Food Donation Form</h1>
+
+    <form action="/track" class="donor-card">
+
+        <div class="row">
+            <label>Donor Name</label>
+            <input type="text" required>
+        </div>
+
+        <div class="row">
+            <label>Donor Type</label>
+            <select>
+                <option>Restaurant</option>
+                <option>Household</option>
+                <option>Event</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <label>Food Type</label>
+            <input type="text" required>
+        </div>
+
+        <div class="row">
+            <label>Quantity</label>
+            <input type="number" required>
+        </div>
+
+        <div class="row">
+            <label>Pickup Time</label>
+            <input type="time" required>
+        </div>
+
+        <div class="row">
+            <label>Location</label>
+            <input type="text" placeholder="Razam, Andhra Pradesh" required>
+        </div>
+
+        <button class="submit-btn">Submit Donation</button>
+
+    </form>
+
+</div>
+
+<script>
+let voices = [];
+
+function loadVoices() {
+    voices = speechSynthesis.getVoices();
+}
+speechSynthesis.onvoiceschanged = loadVoices;
+
+function speak(text, characterSelector) {
+    const msg = new SpeechSynthesisUtterance(text);
+
+    if (voices.length > 0) {
+        msg.voice = voices.find(v => v.name.includes("Female")) || voices[0];
+    }
+
+    /* CHILD VOICE SETTINGS */
+    msg.pitch = 1.8;   // higher pitch = kid voice
+    msg.rate = 1.1;
+    msg.volume = 1;
+
+    const char = document.querySelector(characterSelector);
+    if (char) char.classList.add("talking");
+
+    msg.onend = () => {
+        if (char) char.classList.remove("talking");
+    };
+
+    speechSynthesis.cancel();
+    speechSynthesis.speak(msg);
+}
+
+function speakBoy() {
+    speak(
+        "Hello! Do you want to donate food for children? Please fill the form.",
+        ".boy"
+    );
+}
+
+function speakGirl() {
+    speak(
+        "Thank you for helping the orphanage. Enter your donation details.",
+        ".girl"
+    );
+}
+
+/* AUTO GREETING */
+window.onload = function() {
+    setTimeout(() => {
+        speakBoy();
+        setTimeout(speakGirl, 3000);
+    }, 1200);
+};
+</script>
+
+</body>
+</html>

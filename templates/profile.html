@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="page-home-bg">
+
+<section class="profile-container">
+
+
+<div class="profile-photo-section">
+
+    {% if user.photo %}
+        <img src="{{ url_for('static', filename='uploads/' + user.photo) }}"
+             class="profile-photo-large"
+              onclick="openPhotoModal(this.src)"
+                       style="cursor: zoom-in;">
+             
+    {% else %}
+        <div class="profile-photo-large default-avatar"
+             style="background: {{ user.color }}">
+             {{ user.name.split(' ')[0] }}
+        </div>
+    {% endif %}
+
+    <div id="photoModal" class="photo-modal" onclick="closePhotoModal()">
+    <img id="modalImage">
+</div>
+
+<script>
+function openPhotoModal(src){
+    document.getElementById("modalImage").src = src;
+    document.getElementById("photoModal").style.display = "flex";
+}
+
+function closePhotoModal(){
+    document.getElementById("photoModal").style.display = "none";
+}
+</script>
+
+    <form action="/upload_photo"
+          method="POST"
+          enctype="multipart/form-data"
+          class="profile-photo-upload">
+
+        <label for="profileUpload">Change Photo</label>
+        <input type="file"
+               id="profileUpload"
+               name="photo"
+               accept="image/*"
+               onchange="this.form.submit()">
+    </form>
+
+<form action="/remove_photo" method="POST">
+    <button class="remove-profile-photo">
+        Remove Photo
+    </button>
+</form>
+
+</div>
+
+    <h>MY DETAILS</h>
+<div class="atm-card" style="background: {{ user.color }}">
+
+
+
+
+    <div class="atm-top">
+        <img src="{{ url_for('static', filename='images/logo.jpg') }}" class="atm-logo">
+        <span class="atm-title">CareBridge</span>
+    </div>
+
+    <div class="atm-chip"></div>
+
+    <div class="atm-number">
+        {{ user.id }}
+    </div>
+
+    <div class="atm-bottom">
+        <div>
+            <p class="atm-label">CARD HOLDER</p>
+            <p class="atm-name">{{ user.name }}</p>
+        </div>
+
+        <div>
+            <p class="atm-label">DONOR TYPE</p>
+            <p class="atm-type">{{ user.type }}</p>
+        </div>
+    </div>
+
+    <!-- ✅ QR INSIDE CARD -->
+    <div class="atm-qr">
+        <img src="data:image/png;base64,{{ user.qr }}">
+    </div>
+
+</div>
+
+
+
+<div class="donation-stats glass-frame">
+    <h3>Your Contributions</h3>
+
+<p>🍱 Food Donations: {{ food_count }}</p>
+<p>🎒 Accessories Donations: {{ acc_count }}</p>
+</div>
+
+<!-- ✅ EMAIL BELOW CARD -->
+<div class="member">
+    <p class="m-label">Registered Email</p>
+    <p class="m-value">{{ user.email }}</p>
+</div>
+
+
+<div class="member">
+    <p class="m-label">Age</p>
+    <p class="m-value">{{ user.user_age }}</p>
+</div>
+
+
+</section>
+
+
+
+
+<section class="features">
+  <div class="feature-card">Unique ID →</div>
+  <div class="feature-card">YOUR IDENTITY</div>
+  <div class="feature-card"> ← Unique Color</div>
+</section>
+
+
+
+
+</div>
+
+
+
+<script>
+function openPhotoModal(src){
+    const modal = document.getElementById("photoModal");
+    const img = document.getElementById("modalImage");
+
+    img.src = src;
+    modal.style.display = "flex";
+}
+
+function closePhotoModal(){
+    document.getElementById("photoModal").style.display = "none";
+}
+</script>
+
+{% endblock %}

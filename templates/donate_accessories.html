@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="donate-bg">
+
+<section class="donation-hero">
+<h1>Donate Essentials</h1>
+<p>Clothes, books and supplies can change lives.</p>
+</section>
+
+<section class="donation-container glass-frame">
+
+<h2>🎒 Accessories Donation</h2>
+
+<form method="POST">
+
+<select name="item_type" required>
+<option value="">Select Item</option>
+<option>Clothes</option>
+<option>Books</option>
+<option>Stationery</option>
+<option>Blankets</option>
+<option>Toys</option>
+</select>
+
+<input type="number"
+       name="quantity"
+       min="1"
+       step="1"
+       oninput="if(this.value < 1) this.value = 1;"
+       placeholder="Quantity"
+       required>
+
+<div class="phone-wrapper">
+<span class="phone-prefix">+91</span>
+<input type="tel"
+       name="phone"
+       pattern="[0-9]{10}"
+       maxlength="10"
+       placeholder="Enter phone number"
+       required>
+</div>
+
+<input type="text"
+       name="location"
+       placeholder="Pickup Address"
+       required>
+
+<textarea name="message"
+          placeholder="Optional message"></textarea>
+
+<button type="submit" class="primary-btn">
+Donate Accessories
+</button>
+
+</form>
+
+</section>
+</div>
+
+{% endblock %}
