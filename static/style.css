@@ -129,7 +129,7 @@ width:80px;
 height:80px;
 border-radius:12px;
 object-fit:cover;
-background:white;
+
 }
 
 .ticker-info{
@@ -378,8 +378,8 @@ z-index:-1;
     margin: 8px 0;
     border-radius: 8px;
     border: 1px solid rgba(0,200,255,0.4);
-    background: rgba(255,255,255,0.05);
-    color: white;
+    background: rgba(250, 250, 250, 0.934);
+    color: rgb(255, 255, 255);
     outline: none;
     box-sizing: border-box;   /* ⭐ IMPORTANT FIX */
     transition: 0.25s;
@@ -525,8 +525,8 @@ z-index:-1;
 /* dropdown fix */
 .form-container select {
     appearance: none;
-    background: rgba(255,255,255,0.05);
-    color: rgb(255, 255, 255);
+    background: rgb(255, 255, 255);
+    color: rgb(27, 0, 30);
     border: 1px solid rgba(0,200,255,0.4);
 }
 
@@ -572,7 +572,7 @@ body {
   margin: auto;
   border-radius: 28px;
   padding: 6px;
-  background: linear-gradient(135deg,#6366f1,#0ea5e9,#14b8a6);
+
   box-shadow: 0 25px 60px rgba(0,0,0,0.25);
   transition: 0.5s ease;
 }
@@ -680,26 +680,42 @@ body {
   margin-top: 40px;
 }
 
-.detail-box{
-  padding: 22px;
-  border-radius: 16px;
-  background: rgba(140, 235, 252, 0.689);
-  backdrop-filter: blur(12px);
-  border: 5px solid rgb(0, 0, 0);
-  box-shadow: 0 10px 30px rgba(255, 252, 252, 0.08);
-  transition: 0.4s;
+.cards{
+    position:relative;
+    background:rgba(1, 52, 87, 0.152);
+    border:1px solid rgba(0,255,255,0.2);
+    border-radius:16px;
+    padding:25px;
+    margin:20px 0;
+    text-align:left;
+    overflow:hidden;
+    transition: all 0.4s ease;
 }
 
-.detail-box span{
-  font-weight: 600;
-  color: #001247;
-  display: block;
-  margin-bottom: 8px;
+.cards::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(0,230,255,0.25),
+        transparent
+    );
+    transition:0.6s;
 }
 
-.detail-box:hover{
-  transform: translateY(-6px);
-  box-shadow: 0 20px 45px rgba(150, 205, 215, 0.078);
+.cards:hover{
+    transform:translateY(-8px) scale(1.02);
+    border:1px solid #00e6ff;
+    box-shadow:0 0 25px rgba(0,230,255,0.3);
+}
+
+.cards:hover::before{
+    left:100%;
 }
 
 /* Social Buttons */
@@ -726,31 +742,9 @@ body {
 }
 
 /* Corner IoT Animation */
-.founder-page::before,
-.founder-page::after {
-  content: "";
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  border: 2px solid #00eaff;
-  opacity: 0.2;
-  animation: rotate 14s linear infinite;
-}
 
-.founder-page::before {
-  top: 80px;
-  left: 40px;
-}
 
-.founder-page::after {
-  bottom: 40px;
-  right: 40px;
-}
 
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
 
 
 
@@ -1092,21 +1086,6 @@ body {
     transform: translateY(-4px) scale(1.15);
 }
 
-/* ===== ATM CARD ===== */
-
-
-
-
-/* TOP ROW */
-
-
-/* PREMIUM CHIP */
-
-
-/* CARD NUMBER */
-
-
-/* BOTTOM */
 
 
 
@@ -1575,14 +1554,6 @@ margin-top: 25px;
     cursor: pointer;
 }
 
-/* ===== DONATE PAGE LUXURY BACKGROUND ===== */
-
-
-
-
-
-
-
 
 /* ===== PAGE BACKGROUND ===== */
 .map-hero{
@@ -1805,15 +1776,16 @@ margin-top: 25px;
     padding: 40px;
     border-radius: 20px;
     backdrop-filter: blur(15px);
-    background: rgba(255, 255, 255, 0.05);
-    border: 5px solid rgba(255, 217, 0, 0.573);
+    background: rgb(255, 254, 254);
+    border: 0.5px solid rgba(255, 217, 0, 0.573);
     padding-right: 75px;
+    box-shadow:0px 0px 20px rgba(255, 255, 255, 0.87);
 }
 
 .donation-container h2 {
     text-align: center;
     margin-bottom: 30px;
-    color: #ffffff;
+    color: #370042;
 }
 
 /* ===== INPUTS GENERAL ===== */
@@ -1824,16 +1796,16 @@ form textarea {
     padding: 14px;
     margin-bottom: 18px;
     border-radius: 10px;
-    border: 2px solid #FFD700;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
+    border: 0.5px solid #FFD700;
+    background: rgba(255, 253, 255, 0.375);
+    color: #2b0033;
     font-size: 15px;
     outline: none;
 }
 
 form input::placeholder,
 form textarea::placeholder {
-    color: #ddd;
+    color: #2f0037;
 }
 
 form select {
@@ -1843,8 +1815,8 @@ form select {
 /* ===== FIX INPUT FOCUS WHITE ISSUE ===== */
 form input:focus,
 form textarea:focus {
-    background-color: rgba(59, 0, 0, 0.836);
-    color: white;
+    background-color: rgba(196, 132, 183, 0.836);
+    color: rgb(0, 0, 0);
     border: 1px solid #FFD700;
 }
 
@@ -1919,7 +1891,7 @@ form textarea {
     border: none;
     font-size: 16px;
     font-weight: bold;
-    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    background: linear-gradient(90deg, #00c6ff, #004aa3);
     color: white;
     cursor: pointer;
     transition: 0.3s ease;
@@ -1927,25 +1899,25 @@ form textarea {
 
 .primary-btn:hover {
     transform: scale(1.03);
-    background: linear-gradient(90deg, #0072ff, #00c6ff);
+    background: linear-gradient(90deg, #004aa3, #00c6ff);
 }
 /* ===== FIX SELECT BOX COLOR ===== */
 form select {
     background-color: rgba(255, 255, 255, 0.08);
-    color: white;
-    border: 2px solid #FFD700;
+    color: rgb(41, 1, 39);
+    border: 0.5px solid #FFD700;
 }
 
 /* Fix dropdown options */
 form select option {
-    background-color: #203a43;
-    color: white;
+    background-color: #d46cd4;
+    color: rgb(255, 255, 255);
 }
 
 /* Fix focus state */
 form select:focus {
     background-color: rgba(255, 255, 255, 0.12);
-    color: white;
+    color: rgb(75, 0, 100);
 }
 /* All input, select, textarea fields */
 input,
@@ -1963,7 +1935,7 @@ textarea {
 /* Placeholder color */
 input::placeholder,
 textarea::placeholder {
-    color: #cccccc;
+    color: #220221;
 }
 
 /* When clicked (focus effect) */
@@ -1981,7 +1953,7 @@ input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
 select:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px #2f3e46 inset !important;
-    box-shadow: 0 0 0px 1000px #000000 inset !important;
+    box-shadow: 0 0 0px 1000px #600058 inset !important;
     -webkit-text-fill-color: white !important;
     transition: background-color 5000s ease-in-out 0s;
 }
@@ -2028,4 +2000,81 @@ margin-top:15px;
 font-size:20px;
 font-weight:bold;
 color:#ffd700;
+}
+
+#alertBox{
+
+position:fixed;
+top:0;
+left:0;
+width:100%;
+background:#DC2626;
+color:white;
+font-weight:bold;
+letter-spacing:1px;
+z-index:9999;
+
+}
+
+.contact-container{
+width:500px;
+margin:80px auto;
+background:#fbf1ff;
+padding:40px;
+border-radius:15px;
+text-align:center;
+box-shadow:0px 0px 20px rgba(255, 255, 255, 0.87);
+color: #420a79;
+padding-right: 60px;
+}
+
+.contact-container h2{
+font-size:28px;
+margin-bottom:10px;
+}
+
+.contact-sub{
+font-size:14px;
+margin-bottom:25px;
+color:#6f6f6f;
+}
+
+.contact-container input,
+.contact-container textarea{
+
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border-radius:8px;
+border:1px solid #8b8a8a;
+font-size:14px;
+color: #420a79;
+}
+
+.contact-container textarea{
+height:120px;
+resize:none;
+}
+
+.contact-container button{
+
+background: linear-gradient(90deg, #00c6ff, #004aa3);
+color:rgb(102, 93, 93);
+padding:12px 30px;
+border:none;
+border-radius:25px;
+font-size:16px;
+cursor:pointer;
+}
+
+.contact-container button:hover{
+background: linear-gradient(90deg, #004aa3,#00c6ff);
+}
+
+/* Placeholder text color */
+
+
+/* Placeholder color */
+::placeholder{
+color:#000000;
 }

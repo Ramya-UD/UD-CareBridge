@@ -14,8 +14,8 @@ import firebase_admin
 from firebase_admin import credentials, db as firebase_db
 cred = credentials.Certificate("firebase_key.json")
 
-firebase_admin.initialize_app(cred, {
-    "databaseURL": "https://foodfreshnessdetection-951f9-default-rtdb.firebaseio.com"
+firebase_admin.initialize_app(cred,{
+    "databaseURL":"https://foodfreshnessdetection-951f9-default-rtdb.firebaseio.com/"
 })
 
 
@@ -109,7 +109,7 @@ def generate_qr(data):
     qr.make(fit=True)
 
     # Strong contrast (best for scanning)
-    img = qr.make_image(fill_color="black").convert("RGBA")
+    img = qr.make_image(fill_color="goldenrod").convert("RGBA")
 
     # Remove white background manually 
     datas = img.getdata() 
@@ -160,7 +160,18 @@ def auth():
     return render_template("auth.html")
 
 
+@app.route("/send_message", methods=["POST"])
+def send_message():
 
+    name = request.form["name"]
+    email = request.form["email"]
+    message = request.form["message"]
+
+    print("New message from:", name)
+    print("Email:", email)
+    print("Message:", message)
+
+    return "Message Sent Successfully"
 
 from flask import session, redirect, url_for
 
@@ -419,16 +430,7 @@ def profile():
         acc_count=acc_count
     )
 
-@app.route("/generate_upi", methods=["POST"])
-def generate_upi():
-
-    amount = request.form["amount"]
-
-    upi_link = f"upi://pay?pa=carebridge@upi&pn=CareBridge&am={amount}"
-
-    qr = generate_qr(upi_link)
-
-    return render_template("upi_qr.html", qr=qr, amount=amount)    
+   
 
 
 @app.route("/upload_photo", methods=["POST"])
@@ -511,7 +513,24 @@ def login():
 
 
 
+@app.route("/send_query", methods=["POST"])
+def send_query():
 
+    name = request.form["name"]
+    phone = request.form["phone"]
+    email = request.form["email"]
+    message = request.form["message"]
+
+    ref = db.reference("queries")
+
+    ref.push({
+        "name": name,
+        "phone": phone,
+        "email": email,
+        "message": message
+    })
+
+    return redirect("/contact")
 
 # ---------- LOGOUT ----------
 @app.route("/logout")
@@ -521,15 +540,15 @@ def logout():
 
 # ---------- RUN ----------
 
-@app.route("/check_alert")
-def check_alert():
+@app.route("/get_alert")
+def get_alert():
 
-    alert = firebase_db.reference("alerts").get()
+    data = firebase_db.reference("alerts").get()
 
-    if alert and alert.get("status") == True:
-        return {"status": True}
+    if not data:
+        return {"status": False}
 
-    return {"status": False}
+    return data
 
 # ---------- RUN SERVER ----------
 if __name__ == "__main__":

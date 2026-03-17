@@ -14,7 +14,7 @@
   <!-- Profile Image -->
 
   <div class=" premium-photo">
-<img src="{{ url_for('static', filename='images/roses.jpg') }}" alt="Ramya - Founder CareBridge">
+<img src="{{ url_for('static', filename='images/ki.jpeg') }}" alt="Ramya - Founder CareBridge">
 
   </div>
 
@@ -40,22 +40,22 @@
   <!-- Detailed Info (Visiting Card Style) -->
   <div class="details-grid">
 
-    <div class="detail-box">
+    <div class="cards">
       <span>📧 Email</span>
       <p>carebridge.ap@gmail.com</p>
     </div>
 
-    <div class="detail-box">
+    <div class="cards">
       <span>📍 Location</span>
       <p>Andhra Pradesh, India</p>
     </div>
 
-    <div class="detail-box">
+    <div class="cards">
       <span>🕘 Availability</span>
       <p>9 AM — 6 PM</p>
     </div>
 
-    <div class="detail-box">
+    <div class="cards">
       <span>🔬 Specialization</span>
       <p>IoT Monitoring • Embedded Systems • Food Safety</p>
     </div>
@@ -63,14 +63,32 @@
   </div>
 
   <!-- Social Buttons -->
-  <div class="social-bar">
-    <a href="mailto:udsanu27@gmail.com">Send Email</a>
-    
-  </div>
+
+<div class="contact-container">
+
+<h2>Have Any Query?</h2>
+
+<p class="contact-sub">
+Enter your details and we will respond shortly.
+</p>
+
+<form action="/send_query" method="POST">
+
+<input type="text" name="name" placeholder="Full Name" required>
+
+<input type="text" name="phone" placeholder="Mobile Number" required>
+
+<input type="email" name="email" placeholder="Email Address" required>
+
+<textarea name="message" placeholder="Write your message"></textarea>
+
+<button type="submit">Submit</button>
+
+</form>
+
+</div>
 
 </section>
-
-
 
 
 
