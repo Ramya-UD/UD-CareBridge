@@ -12,11 +12,13 @@ from flask import request
 
 import firebase_admin
 from firebase_admin import credentials, db as firebase_db
-cred = credentials.Certificate("firebase_key.json")
+import json
+from firebase_admin import credentials
 
-firebase_admin.initialize_app(cred,{
-    "databaseURL":"https://foodfreshnessdetection-951f9-default-rtdb.firebaseio.com/"
-})
+firebase_key = os.environ.get("FIREBASE_KEY")
+cred = credentials.Certificate(json.loads(firebase_key))
+
+firebase_admin.initialize_app(cred)
 
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
