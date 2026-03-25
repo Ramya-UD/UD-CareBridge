@@ -1,5 +1,6 @@
 flask
 firebase-admin
+flask-sqlalchemy
 qrcode
 Pillow
 gunicorn
